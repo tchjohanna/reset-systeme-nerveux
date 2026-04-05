@@ -541,11 +541,289 @@
     font-size: 10px;
     color: var(--text-dim);
   }
-    
-    
+
+  /* ============================================================
+     ONBOARDING
+     ============================================================ */
+  .onboarding {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 20%, rgba(127,179,211,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 75% 80%, rgba(168,197,218,0.08) 0%, transparent 50%),
+      rgba(7,9,26,0.97);
+    backdrop-filter: blur(20px);
+  }
+  .onboarding.show { display: flex; }
+  .ob-shell { width: min(100%, 400px); }
+  .ob-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(127,179,211,0.15);
+    border-radius: 28px;
+    padding: 24px 22px 20px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    overflow: hidden;
+    position: relative;
+  }
+  .ob-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(127,179,211,0.05), transparent 40%);
+    pointer-events: none;
+  }
+  .ob-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .ob-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .ob-brand-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .ob-skip {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color .2s;
+  }
+  .ob-skip:hover { color: var(--text); }
+  .ob-slider-wrap {
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  .ob-slider {
+    display: flex;
+    transition: transform .45s cubic-bezier(.22,.9,.24,1);
+    will-change: transform;
+    touch-action: pan-y;
+  }
+  .ob-slide {
+    min-width: 100%;
+    text-align: center;
+    padding: 4px 4px 8px;
+    user-select: none;
+  }
+  .ob-hero {
+    width: 100px; height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(127,179,211,0.15), rgba(127,179,211,0.04));
+    border: 1px solid rgba(127,179,211,0.2);
+    box-shadow: 0 0 40px rgba(127,179,211,0.1);
+    font-size: 2.8rem;
+    position: relative;
+  }
+  .ob-hero::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(127,179,211,0.08);
+    animation: ringPulse 3s ease-in-out infinite;
+  }
+  .ob-kicker {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .ob-slide h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .ob-slide h2 em { font-style: italic; color: var(--accent); }
+  .ob-slide p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-dim);
+    max-width: 300px;
+    margin: 0 auto 14px;
+  }
+  .ob-chips {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .ob-chip {
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(127,179,211,0.2);
+    background: rgba(127,179,211,0.06);
+    color: var(--accent2);
+  }
+  .ob-progress {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 20px 0 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .ob-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    transition: all .3s ease;
+  }
+  .ob-dot.active {
+    width: 22px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(127,179,211,0.4);
+  }
+  .ob-actions {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .ob-btn {
+    flex: 1;
+    border: none;
+    border-radius: 14px;
+    padding: 13px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .ob-btn:active { transform: scale(.98); }
+  .ob-btn.secondary {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+  .ob-btn.primary {
+    background: rgba(127,179,211,0.15);
+    border: 1px solid rgba(127,179,211,0.35);
+    color: var(--accent2);
+    box-shadow: 0 4px 20px rgba(127,179,211,0.1);
+  }
+  .ob-btn.primary:hover { background: rgba(127,179,211,0.22); }
+  .ob-btn.install { background: rgba(127,179,211,0.25); border-color: rgba(127,179,211,0.5); }
+  .ob-swipe-hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 12px;
+    position: relative;
+    z-index: 2;
+    opacity: .6;
+  }
+  .btn-replay {
+    background: transparent;
+    border: 1px solid rgba(127,179,211,0.2);
+    color: rgba(127,179,211,0.45);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all .25s;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  .btn-replay:hover { border-color: var(--accent); color: var(--accent); background: rgba(127,179,211,0.06); }
+
 </style>
 </head>
 <body>
+
+<!-- ONBOARDING -->
+<div id="onboarding" class="onboarding">
+  <div class="ob-shell">
+    <div class="ob-card">
+      <div class="ob-top">
+        <div class="ob-brand"><div class="ob-brand-dot"></div> Nervous Reset</div>
+        <button class="ob-skip" id="obSkip">Passer</button>
+      </div>
+      <div class="ob-slider-wrap">
+      <div class="ob-slider" id="obSlider">
+        <section class="ob-slide">
+          <div class="ob-hero">🌿</div>
+          <div class="ob-kicker">Bienvenue</div>
+          <h2>Ton corps sait se <em>réguler</em>.<br>Il a juste besoin d'un rappel.</h2>
+          <p>Nervous Reset t'accompagne avec des exercices doux pour revenir au calme — en 1 à 3 minutes, sans effort.</p>
+          <div class="ob-chips">
+            <span class="ob-chip">🌿 Exercices guidés</span>
+            <span class="ob-chip">🌬️ Respiration</span>
+            <span class="ob-chip">📓 Journal</span>
+          </div>
+        </section>
+        <section class="ob-slide">
+          <div class="ob-hero">🧠</div>
+          <div class="ob-kicker">La méthode</div>
+          <h2>La <em>neuroscience</em>,<br>simplement.</h2>
+          <p>Chaque exercice envoie un signal de sécurité à ton système nerveux. Pas par la force — par la répétition douce et régulière.</p>
+          <div class="ob-chips">
+            <span class="ob-chip">👁️ Orientation</span>
+            <span class="ob-chip">🤲 Ancrage corporel</span>
+            <span class="ob-chip">🌀 Nerf vague</span>
+          </div>
+        </section>
+        <section class="ob-slide">
+          <div class="ob-hero">📲</div>
+          <div class="ob-kicker">Prête à commencer</div>
+          <h2>Installe l'app pour<br>l'avoir <em>toujours avec toi</em>.</h2>
+          <p>Gratuite, sans compte, fonctionne hors-ligne. Ajoute-la à ton écran d'accueil pour un accès en un geste.</p>
+          <div class="ob-chips">
+            <span class="ob-chip">💾 Données locales</span>
+            <span class="ob-chip">📵 Hors-ligne</span>
+            <span class="ob-chip">🔒 Privé</span>
+          </div>
+        </section>
+      </div><!-- /ob-slider -->
+      </div><!-- /ob-slider-wrap -->
+      <div class="ob-progress">
+        <span class="ob-dot active"></span>
+        <span class="ob-dot"></span>
+        <span class="ob-dot"></span>
+      </div>
+      <div class="ob-actions">
+        <button class="ob-btn secondary" id="obPrev">Retour</button>
+        <button class="ob-btn primary" id="obNext">Suivant</button>
+      </div>
+      <p class="ob-swipe-hint">Glisse ← → pour naviguer</p>
+    </div>
+  </div>
+</div>
 
 <div id="installBanner" class="installBanner">
   <span style="font-size:24px">📲</span>
@@ -733,6 +1011,7 @@
 
     <div class="lw-footer-legal">
       <p>© <span id="lw-year"></span> laboWeb</p>
+      <button class="btn-replay" id="replayOnboardingBtn">✨ Revoir l'intro</button>
     </div>
   </div>
 </footer>
@@ -1018,6 +1297,75 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 document.getElementById('dismissBanner').addEventListener('click', () => {
   document.getElementById('installBanner').classList.remove('show');
 });
+
+// === ONBOARDING ===
+(function () {
+  const SEEN_KEY  = 'nervous_reset_onboarding_seen';
+  const ob        = document.getElementById('onboarding');
+  const slider    = document.getElementById('obSlider');
+  const dots      = [...document.querySelectorAll('.ob-dot')];
+  const btnPrev   = document.getElementById('obPrev');
+  const btnNext   = document.getElementById('obNext');
+  const btnSkip   = document.getElementById('obSkip');
+  const btnReplay = document.getElementById('replayOnboardingBtn');
+
+  let step = 0;
+  let swipeStartX = 0, swipeCurX = 0, swiping = false;
+
+  function update() {
+    slider.style.transform = `translateX(-${step * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === step));
+    btnPrev.style.opacity       = step === 0 ? '0.35' : '1';
+    btnPrev.style.pointerEvents = step === 0 ? 'none' : 'auto';
+    if (step === 2) {
+      btnNext.textContent = deferredPrompt ? "Installer l'app" : 'Commencer';
+      btnNext.classList.toggle('install', !!deferredPrompt);
+    } else {
+      btnNext.textContent = 'Suivant';
+      btnNext.classList.remove('install');
+    }
+  }
+
+  function closeOb() {
+    ob.classList.remove('show');
+    localStorage.setItem(SEEN_KEY, 'true');
+  }
+
+  async function nextStep() {
+    if (step < 2) { step++; update(); return; }
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') showToast('App installée 🎉');
+      deferredPrompt = null;
+    }
+    closeOb();
+  }
+
+  btnNext.addEventListener('click', nextStep);
+  btnPrev.addEventListener('click', () => { if (step > 0) { step--; update(); } });
+  btnSkip.addEventListener('click', closeOb);
+  btnReplay.addEventListener('click', () => { step = 0; update(); ob.classList.add('show'); });
+
+  slider.addEventListener('touchstart', e => { swiping = true; swipeStartX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchmove',  e => { if (swiping) swipeCurX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchend', () => {
+    if (!swiping) return;
+    const diff = swipeCurX - swipeStartX;
+    if (Math.abs(diff) > 50) { step = diff < 0 ? Math.min(step + 1, 2) : Math.max(step - 1, 0); update(); }
+    swiping = false;
+  });
+  slider.addEventListener('mousedown', e => { swiping = true; swipeStartX = e.clientX; swipeCurX = e.clientX; });
+  window.addEventListener('mousemove', e => { if (swiping) swipeCurX = e.clientX; });
+  window.addEventListener('mouseup', () => {
+    if (!swiping) return;
+    const diff = swipeCurX - swipeStartX;
+    if (Math.abs(diff) > 50) { step = diff < 0 ? Math.min(step + 1, 2) : Math.max(step - 1, 0); update(); }
+    swiping = false;
+  });
+
+  if (!localStorage.getItem(SEEN_KEY)) { ob.classList.add('show'); update(); }
+})();
 
 // === INIT ===
 loadStats();
